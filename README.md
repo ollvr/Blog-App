@@ -49,8 +49,11 @@ client: Houses the React frontend application with components, reducers, actions
 Create a .env file in the root of your project and add the following variables:
 
 PORT=YOUR PORT
+
 URI=YOUR MONGO DB URI
+
 JWT_SECRET=YOUR JWT SECRET
+
 NODE_ENV=development
 
 
