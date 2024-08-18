@@ -26,11 +26,15 @@ Start the development server:
 ### Backend:
 
 cd backend
+npm install
+
 npm start
 
 ### Frontend:
 
 cd front-end
+
+npm install
 npm run dev
 
 
