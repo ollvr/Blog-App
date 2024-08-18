@@ -3,6 +3,7 @@ const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const connectDB = require("./config/db")
 const cors = require("cors")
+const errorHandler = require("./middleware/errorHandler")
 dotenv.config()
 connectDB()
 const app = express()
@@ -22,18 +23,7 @@ app.use("/api/comments",require("./routes/comment"))
 
 
     
-app.use((err,req,res,next) => {
-   const statusCode = err.statusCode || 500
-   console.error(err.message)
-   if(process.env.NODE_ENV !== "production"){
-    console.error(err.stack)
-   }
-
-   res.status(statusCode).json({
-    message:err.message,
-    stack:process.env.NODE_ENV === "production" ? {} : err.stack
-   })
-})
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
