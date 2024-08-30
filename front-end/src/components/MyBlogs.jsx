@@ -10,6 +10,7 @@ function MyBlogs() {
   const [menuOpen , setMenuOpen] = useState(null)
 
   const toggleMenu = (id) => {
+    console.log("MENU OPEN",id)
     setMenuOpen(menuOpen === id ? null : id)
   }
 

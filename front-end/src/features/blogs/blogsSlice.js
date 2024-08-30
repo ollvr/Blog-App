@@ -1,11 +1,13 @@
 import {createSlice , createAsyncThunk} from "@reduxjs/toolkit"
-import axios from "axios"
+import axiosInstance from "../../axiosInstance"
 
 export const fetchBlogs = createAsyncThunk(
     "blogs/fetchBlogs",
     async(_, {rejectWithValue}) =>{
         try {
-            const response = await axios.get("http://localhost:4000/api/blogs")
+            const response = await axiosInstance.get("/blogs",{
+                withCredentials:false
+            })
             return response.data
         } catch (error) {
             console.log(error)
@@ -18,9 +20,7 @@ export const fetchMyBlogs = createAsyncThunk(
     "blogs/fetchMyBlogs",
     async(_, {rejectWithValue}) =>{
         try {
-            const response = await axios.get("http://localhost:4000/api/blogs/user",{
-                withCredentials:true
-            })
+            const response = await axiosInstance.get("/blogs/user",)
             return response.data
         } catch (error) {
             console.log(error)
@@ -34,9 +34,7 @@ export const createBlog = createAsyncThunk(
     "blogs/createBlog",
     async({title,content}, {rejectWithValue}) =>{
         try {
-             const response = await axios.post("http://localhost:4000/api/blogs",{title,content},{
-                withCredentials:true
-            })
+             const response = await axiosInstance.post("/blogs",{title,content})
             return response.data
         } catch (error) {
             console.log(error)
@@ -50,9 +48,7 @@ export const updateBlog = createAsyncThunk(
     "blogs/updateBlog",
     async({id,title,content}, {rejectWithValue}) =>{
         try {
-             const response = await axios.put(`http://localhost:4000/api/blogs/${id}`,{title,content},{
-                withCredentials:true
-            })
+             const response = await axiosInstance.put(`/blogs/${id}`,{title,content})
             return response.data
         } catch (error) {
             console.log(error)
@@ -66,9 +62,7 @@ export const deleteBlog = createAsyncThunk(
     "blogs/deleteBlog",
     async(id, {rejectWithValue}) =>{
         try {
-             await axios.delete(`http://localhost:4000/api/blogs/${id}`,{
-                withCredentials:true
-            })
+             await axiosInstance.delete(`/blogs/${id}`)
             return id
         } catch (error) {
             console.log(error)

@@ -3,10 +3,11 @@ const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const connectDB = require("./config/db")
 const cors = require("cors")
-
 const errorHandler = require("./middleware/errorHandler")
+const Generate_Jwt_Secret = require("./utils/generateJwtSecret")
 dotenv.config()
 connectDB()
+Generate_Jwt_Secret()
 const app = express()
 
 app.use(cors({

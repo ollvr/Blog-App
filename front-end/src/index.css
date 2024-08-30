@@ -291,7 +291,7 @@ body {
   .blog-item {
     position: relative;
     background: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 60px;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -322,6 +322,7 @@ body {
   .create-blog-btn:hover, .create-blog-button:hover {
     background-color: #4cae4c;
   }
+  
   
   .blog-actions {
     position: relative;
@@ -363,6 +364,9 @@ body {
   .menu button:hover {
     background: #f5f5f5;
   }
+  
+
+  
   
   a {
     color: #337ab7;

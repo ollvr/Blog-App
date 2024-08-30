@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '../../axiosInstance';
 
 const initialState = {
   comments: [],
@@ -12,7 +12,9 @@ export const fetchComments = createAsyncThunk(
   'comments/fetchComments',
   async (blogId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/comments?blogId=${blogId}`);
+      const response = await axiosInstance.get(`/comments?blogId=${blogId}`,{
+        withCredentials:false
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -24,7 +26,7 @@ export const addComment = createAsyncThunk(
   'comments/addComment',
   async ({ blogId, content }, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/comments', { blogId, content }, { withCredentials: true });
+      const response = await axiosInstance.post('/comments', { blogId, content },);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -36,7 +38,7 @@ export const updateComment = createAsyncThunk(
   'comments/updateComment',
   async ({ id, content }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`http://localhost:4000/api/comments/${id}`, { content }, { withCredentials: true });
+      const response = await axiosInstance.put(`/comments/${id}`, { content });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -48,7 +50,7 @@ export const deleteComment = createAsyncThunk(
   'comments/deleteComment',
   async (id, { rejectWithValue }) => {
     try {
-      await axios.delete(`http://localhost:4000/api/comments/${id}`, { withCredentials: true });
+      await axiosInstance.delete(`/comments/${id}`);
       return id;
     } catch (error) {
       return rejectWithValue(error.response.data);

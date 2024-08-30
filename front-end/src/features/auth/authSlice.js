@@ -1,13 +1,11 @@
 import {createSlice , createAsyncThunk} from "@reduxjs/toolkit"
-import axios from "axios"
+import axiosInstance from "../../axiosInstance"
 
 export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async({email,password} , {rejectWithValue}) =>{
         try {
-            const response = await axios.post("http://localhost:4000/api/auth/login",{email,password},{
-                withCredentials:true
-            })
+            const response = await axiosInstance.post("/auth/login",{email,password})
             const user = response.data.user
             return {username:user.username ,email:user.email}
         } catch (error) {
@@ -21,9 +19,7 @@ export const registerUser = createAsyncThunk(
     "auth/registerUser",
     async({username,email,password} , {rejectWithValue}) =>{
         try {
-            const response = await axios.post("http://localhost:4000/api/auth/register",{username,email,password},{
-                withCredentials:true
-            })
+            const response = await axiosInstance.post("/auth/register",{username,email,password})
             const user = response.data.user
             return {username:user.username ,email:user.email}
         } catch (error) {
@@ -38,9 +34,7 @@ export const logout = createAsyncThunk(
     "auth/logout",
     async(_, {rejectWithValue}) =>{
         try {
-             await axios.post("http://localhost:4000/api/auth/logout",{},{
-                withCredentials:true
-            })
+             await axiosInstance.post("/auth/logout",{},)
             
         } catch (error) {
             console.log(error)
